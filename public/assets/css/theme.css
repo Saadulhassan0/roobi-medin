@@ -1,0 +1,55 @@
+:root {
+    /* DEFAULT DARK MODE THEME */
+    --bg-primary: #050816;
+    --bg-secondary: #0F172A;
+    --text-primary: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    
+    --primary-color: #3B82F6;
+    --accent-color: #22D3EE;
+    --error-color: #EF4444;
+    --success-color: #10B981;
+    
+    --glass-bg: rgba(15, 23, 42, 0.6);
+    --glass-border: rgba(34, 211, 238, 0.2);
+    --glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    
+    --input-bg: rgba(255, 255, 255, 0.05);
+    --input-border: rgba(255, 255, 255, 0.1);
+    --input-focus: rgba(34, 211, 238, 0.5);
+    
+    --btn-bg: linear-gradient(135deg, #3B82F6, #22D3EE);
+    --btn-hover: linear-gradient(135deg, #2563EB, #06B6D4);
+    --btn-text: #ffffff;
+
+    --particles-opacity: 0.5;
+}
+
+[data-theme="light"] {
+    --bg-primary: #F8FAFC;
+    --bg-secondary: #E2E8F0;
+    --text-primary: #0F172A;
+    --text-secondary: #475569;
+    
+    --primary-color: #2563EB;
+    --accent-color: #0891B2;
+    
+    --glass-bg: rgba(255, 255, 255, 0.7);
+    --glass-border: rgba(37, 99, 235, 0.2);
+    --glass-shadow: 0 8px 32px 0 rgba(37, 99, 235, 0.1);
+    
+    --input-bg: rgba(255, 255, 255, 0.9);
+    --input-border: rgba(148, 163, 184, 0.4);
+    --input-focus: rgba(37, 99, 235, 0.5);
+    
+    --btn-bg: linear-gradient(135deg, #2563EB, #0891B2);
+    --btn-hover: linear-gradient(135deg, #1D4ED8, #0E7490);
+    --btn-text: #ffffff;
+
+    --particles-opacity: 0.2;
+}
+
+/* Base Transition for Theme Switching */
+* {
+    transition: background-color 0.4s ease, border-color 0.4s ease, color 0.4s ease, box-shadow 0.4s ease;
+}

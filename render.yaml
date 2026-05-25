@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: roobi-backend
+    env: php
+    plan: free
+    buildCommand: "composer install"
+    envVars:
+      - key: DB_HOST
+        value: "your-cloud-database-host"
+      - key: DB_PORT
+        value: "3306"
+      - key: DB_NAME
+        value: "your-database-name"
+      - key: DB_USER
+        value: "your-database-username"
+      - key: DB_PASS
+        value: "your-database-password"

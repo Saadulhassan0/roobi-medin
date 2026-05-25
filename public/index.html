@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedIn - AI Pharmacy Management</title>
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/theme.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Theme Toggle -->
+    <div class="theme-toggle" id="theme-toggle">
+        <i class="fas fa-moon"></i>
+    </div>
+
+    <!-- Background Elements -->
+    <div class="bg-animation"></div>
+    <div class="particles"></div>
+
+    <!-- Main Split Screen Container -->
+    <div class="container" id="main-container">
+        
+        <!-- Login Form Box -->
+        <div class="form-box login-box">
+            <h2 class="title">Welcome Back</h2>
+            <div id="login-alert" class="alert-msg"></div>
+            
+            <form id="login-form">
+                <div class="input-group">
+                    <input type="email" name="email" id="login-email" placeholder="Email Address" required>
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <span class="error-text" id="error-login-email"></span>
+                
+                <div class="input-group">
+                    <input type="password" name="password" id="login-password" placeholder="Password" required>
+                    <i class="fas fa-eye-slash toggle-password"></i>
+                </div>
+                <span class="error-text" id="error-login-password"></span>
+                
+                <div class="input-group">
+                    <select name="role" id="login-role" required>
+                        <option value="" disabled selected>Select Your Role</option>
+                        <option value="admin">Admin</option>
+                        <option value="pharmacist">Pharmacist</option>
+                        <option value="supplier">Supplier</option>
+                        <option value="customer">Customer</option>
+                    </select>
+                    <i class="fas fa-user-tag"></i>
+                </div>
+                <span class="error-text" id="error-login-role"></span>
+                
+                <div class="options">
+                    <label><input type="checkbox" name="remember"> Remember Me</label>
+                    <a href="#">Forgot Password?</a>
+                </div>
+                
+                <button type="submit" class="submit-btn">Login to Workspace</button>
+            </form>
+            
+            <div class="mobile-toggle">
+                Don't have an account? <span class="to-register">Register</span>
+            </div>
+        </div>
+
+        <!-- Register Form Box -->
+        <div class="form-box register-box">
+            <h2 class="title">Create Account</h2>
+            <div id="register-alert" class="alert-msg"></div>
+            
+            <form id="register-form">
+                <div class="input-group">
+                    <input type="text" name="full_name" id="reg-name" placeholder="Full Name" required>
+                    <i class="fas fa-user"></i>
+                </div>
+                <span class="error-text" id="error-reg-name"></span>
+                
+                <div class="input-group">
+                    <input type="email" name="email" id="reg-email" placeholder="Email Address" required>
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <span class="error-text" id="error-reg-email"></span>
+
+                <div class="input-group">
+                    <input type="tel" name="phone_number" id="reg-phone" placeholder="Phone Number" required>
+                    <i class="fas fa-phone"></i>
+                </div>
+                <span class="error-text" id="error-reg-phone"></span>
+                
+                <div class="input-group">
+                    <input type="password" name="password" id="reg-password" placeholder="Password" required>
+                    <i class="fas fa-eye-slash toggle-password"></i>
+                </div>
+                <span class="error-text" id="error-reg-password"></span>
+                <!-- Password Strength Meter -->
+                <div class="strength-meter"><div id="strength-meter-fill"></div></div>
+                
+                <div class="input-group">
+                    <input type="password" id="reg-confirm-password" placeholder="Confirm Password" required>
+                    <i class="fas fa-lock"></i>
+                </div>
+                <span class="error-text" id="error-reg-confirm-password"></span>
+                
+                <div class="input-group">
+                    <select name="role" id="reg-role" required>
+                        <option value="" disabled selected>Select Your Role</option>
+                        <option value="admin">Admin</option>
+                        <option value="pharmacist">Pharmacist</option>
+                        <option value="supplier">Supplier</option>
+                        <option value="customer">Customer</option>
+                    </select>
+                    <i class="fas fa-user-tag"></i>
+                </div>
+                <span class="error-text" id="error-reg-role"></span>
+                
+                <button type="submit" class="submit-btn">Initialize Workspace</button>
+            </form>
+            
+            <div class="mobile-toggle">
+                Already have an account? <span class="to-login">Login</span>
+            </div>
+        </div>
+
+        <!-- Sliding Info Panel -->
+        <div class="info-panel">
+            <h2 id="panel-title">MedIn AI Platform</h2>
+            <p id="panel-desc">Experience the future of pharmacy management. Secure, lightning-fast, and powered by next-generation technology.</p>
+            <button class="toggle-btn to-register">New User? Register</button>
+            <button class="toggle-btn to-login" style="display: none; margin-top: 15px;">Existing User? Login</button>
+        </div>
+    </div>
+
+    <!-- Floating AI Assistant Button Placeholder -->
+    <div class="ai-assistant-btn" title="AI Assistant">
+        <i class="fas fa-robot"></i>
+    </div>
+
+    <!-- Toast Notifications Container -->
+    <div id="toast-container"></div>
+
+    <!-- Scripts -->
+    <script src="assets/js/preloader.js"></script>
+    <script src="assets/js/theme.js"></script>
+    <script src="assets/js/app.js"></script>
+    
+    <script>
+        // Simple logic to switch the panel text/buttons based on active state
+        document.querySelectorAll('.to-register').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelector('.info-panel .to-register').style.display = 'none';
+                document.querySelector('.info-panel .to-login').style.display = 'inline-block';
+            });
+        });
+
+        document.querySelectorAll('.to-login').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelector('.info-panel .to-login').style.display = 'none';
+                document.querySelector('.info-panel .to-register').style.display = 'inline-block';
+            });
+        });
+    </script>
+</body>
+</html>

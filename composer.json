@@ -1,0 +1,7 @@
+{
+    "name": "roobi/medin",
+    "description": "MedIn Pharmacy Management",
+    "require": {
+        "php": ">=7.4"
+    }
+}
