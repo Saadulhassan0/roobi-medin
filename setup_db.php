@@ -7,6 +7,25 @@ $conn = $database->getConnection();
 try {
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
+    // Create Users Table
+    $conn->exec("
+        CREATE TABLE IF NOT EXISTS users (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            full_name VARCHAR(100) NOT NULL,
+            email VARCHAR(100) NOT NULL UNIQUE,
+            phone_number VARCHAR(20) NOT NULL,
+            password_hash VARCHAR(255) NOT NULL,
+            role ENUM('admin', 'pharmacist', 'supplier', 'customer') NOT NULL,
+            profile_image VARCHAR(255) DEFAULT NULL,
+            status ENUM('active', 'inactive', 'suspended') DEFAULT 'active',
+            is_verified BOOLEAN DEFAULT FALSE,
+            last_login DATETIME DEFAULT NULL,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+        )
+    ");
+    echo "Users table created/exists.\n";
+
     // Create Suppliers Table
     $conn->exec("
         CREATE TABLE IF NOT EXISTS suppliers (
