@@ -15,12 +15,32 @@ try {
         echo "branch exists or error: " . $e->getMessage() . "\n";
     }
 
+    // Add missing verification columns to users
+    try {
+        $conn->exec("ALTER TABLE users ADD COLUMN verification_code VARCHAR(10) DEFAULT NULL");
+        $conn->exec("ALTER TABLE users ADD COLUMN verification_expiry DATETIME DEFAULT NULL");
+        $conn->exec("ALTER TABLE users ADD COLUMN email_verified BOOLEAN DEFAULT FALSE");
+        echo "Added verification columns to users.\n";
+    } catch(PDOException $e) {
+        echo "verification columns exist or error: " . $e->getMessage() . "\n";
+    }
+
     // Add status to users if not exists
     try {
         $conn->exec("ALTER TABLE users ADD COLUMN status VARCHAR(20) DEFAULT 'active'");
         echo "Added status to users.\n";
     } catch(PDOException $e) {
         echo "status exists or error: " . $e->getMessage() . "\n";
+    }
+
+    // Insert Default Admin
+    try {
+        $conn->exec("INSERT INTO users (full_name, email, phone_number, password_hash, role, is_verified, email_verified) 
+        VALUES ('Super Admin', 'admin@medin.com', '1234567890', '\$2y\$10\$W9M7.E4kQcQ.s9rOaR.O..W.QoG5Qp/zXq8m9QO8tB3B5C.QjYqXG', 'admin', TRUE, TRUE)
+        ON DUPLICATE KEY UPDATE id=id");
+        echo "Default admin user ensured.\n";
+    } catch(PDOException $e) {
+        echo "admin error: " . $e->getMessage() . "\n";
     }
 
     // Add status to suppliers if not exists
