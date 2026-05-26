@@ -1,8 +1,9 @@
 # Use official PHP image with Apache
 FROM php:8.2-apache
 
-# Install required PHP extensions for MySQL connection
-RUN docker-php-ext-install pdo pdo_mysql mysqli
+# Install required PHP extensions for MySQL connection and CA certificates
+RUN apt-get update && apt-get install -y ca-certificates && \
+    docker-php-ext-install pdo pdo_mysql mysqli
 
 # Install Composer (just in case it's needed)
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
