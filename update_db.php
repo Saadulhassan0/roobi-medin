@@ -43,6 +43,56 @@ try {
         echo "admin error: " . $e->getMessage() . "\n";
     }
 
+    // CREATE PURCHASE ORDERS TABLE
+    try {
+        $conn->exec("
+            CREATE TABLE IF NOT EXISTS purchase_orders (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                admin_id INT NOT NULL,
+                supplier_id INT NOT NULL,
+                notes TEXT,
+                due_date DATE NULL,
+                delivery_location VARCHAR(255) NULL,
+                status ENUM('Pending', 'Accepted', 'Rejected', 'Shipped', 'Completed', 'Delivered') DEFAULT 'Pending',
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                shipped_at TIMESTAMP NULL,
+                delivered_at TIMESTAMP NULL,
+                FOREIGN KEY (admin_id) REFERENCES users(id) ON DELETE CASCADE,
+                FOREIGN KEY (supplier_id) REFERENCES suppliers(id) ON DELETE CASCADE
+            )
+        ");
+        echo "purchase_orders table created.\n";
+
+        $conn->exec("
+            CREATE TABLE IF NOT EXISTS purchase_order_items (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                po_id INT NOT NULL,
+                medicine_id INT NOT NULL,
+                quantity_requested INT NOT NULL,
+                unit_price DECIMAL(10,2) NOT NULL,
+                FOREIGN KEY (po_id) REFERENCES purchase_orders(id) ON DELETE CASCADE,
+                FOREIGN KEY (medicine_id) REFERENCES medicines(id) ON DELETE CASCADE
+            )
+        ");
+        echo "purchase_order_items table created.\n";
+
+        $conn->exec("
+            CREATE TABLE IF NOT EXISTS po_messages (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                po_id INT NOT NULL,
+                sender_id INT NOT NULL,
+                sender_role VARCHAR(50) NOT NULL,
+                message TEXT NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (po_id) REFERENCES purchase_orders(id) ON DELETE CASCADE,
+                FOREIGN KEY (sender_id) REFERENCES users(id) ON DELETE CASCADE
+            )
+        ");
+        echo "po_messages table created.\n";
+    } catch(PDOException $e) {
+        echo "PO Tables error: " . $e->getMessage() . "\n";
+    }
+
     // Add status to suppliers if not exists
     try {
         $conn->exec("ALTER TABLE suppliers ADD COLUMN status VARCHAR(20) DEFAULT 'active'");
