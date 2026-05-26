@@ -1,7 +1,7 @@
 {
   "version": 2,
   "rewrites": [
-    { "source": "/app/(.*)", "destination": "https://YOUR_RENDER_URL.onrender.com/app/$1" },
+    { "source": "/app/(.*)", "destination": "https://roobi-backend.onrender.com/app/$1" },
     { "source": "/assets/(.*)", "destination": "/public/assets/$1" },
     { "source": "/", "destination": "/public/index.html" },
     { "source": "/(.*)", "destination": "/public/$1" }
