@@ -22,8 +22,11 @@ class Database {
         $this->conn = null;
 
         try {
-            $this->conn = new \PDO("mysql:host=" . $this->host . ";port=" . $this->port . ";dbname=" . $this->db_name, $this->username, $this->password);
-            $this->conn->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+            $options = [
+                \PDO::ATTR_ERRMODE => \PDO::ERRMODE_EXCEPTION,
+                \PDO::MYSQL_ATTR_SSL_VERIFY_SERVER_CERT => false,
+            ];
+            $this->conn = new \PDO("mysql:host=" . $this->host . ";port=" . $this->port . ";dbname=" . $this->db_name, $this->username, $this->password, $options);
             $this->conn->exec("set names utf8");
         } catch(\PDOException $exception) {
             // In production, log the error rather than displaying it
